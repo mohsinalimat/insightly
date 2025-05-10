@@ -55,13 +55,13 @@ def get_customer_insights(filters):
         payment_request = frappe.db.sql("""
             SELECT COUNT(*) as total_records, SUM(grand_total) as total_amount
             FROM `tabPayment Request`
-            WHERE party=%s AND paty_type='Customer' AND docstatus=1 AND creation >= %s AND creation <= %s
+            WHERE party=%s AND party_type='Customer' AND docstatus=1 AND creation >= %s AND creation <= %s
         """, (customer_name, start_date, end_date), as_dict=True)[0]
 
         payment_entry = frappe.db.sql("""
             SELECT COUNT(*) as total_records, SUM(paid_amount) as total_amount
             FROM `tabPayment Entry`
-            WHERE party=%s AND paty_type='Customer' AND docstatus=1 AND posting_date >= %s AND posting_date <= %s
+            WHERE party=%s AND party_type='Customer' AND docstatus=1 AND posting_date >= %s AND posting_date <= %s
         """, (customer_name, start_date, end_date), as_dict=True)[0]
 
         # Format amounts and exclude empty sections
